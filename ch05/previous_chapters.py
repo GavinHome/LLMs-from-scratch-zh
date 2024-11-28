@@ -25,7 +25,8 @@ class GPTDatasetV1(Dataset):
         self.target_ids = []
 
         # Tokenize the entire text
-        token_ids = tokenizer.encode(txt, max_length=len(txt),truncation=True)
+        # token_ids = tokenizer.encode(txt, max_length=len(txt),truncation=True)
+        token_ids = tokenizer.encode(txt, max_length=None, truncation=False)
 
         # Use a sliding window to chunk the book into overlapping sequences of max_length
         for i in range(0, len(token_ids) - max_length, stride):
@@ -244,7 +245,7 @@ def generate_text_simple(model, idx, max_new_tokens, context_size):
 if __name__ == "__main__":
 
     GPT_CONFIG_124M = {
-        "vocab_size": 50257,     # Vocabulary size
+        "vocab_size": 21128,     # Vocabulary size
         "context_length": 1024,  # Context length
         "emb_dim": 768,          # Embedding dimension
         "n_heads": 12,           # Number of attention heads
