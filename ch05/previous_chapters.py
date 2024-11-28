@@ -25,7 +25,6 @@ class GPTDatasetV1(Dataset):
         self.target_ids = []
 
         # Tokenize the entire text
-        # token_ids = tokenizer.encode(txt, max_length=len(txt),truncation=True)
         token_ids = tokenizer.encode(txt, max_length=None, truncation=False)
 
         # Use a sliding window to chunk the book into overlapping sequences of max_length
@@ -45,7 +44,6 @@ class GPTDatasetV1(Dataset):
 def create_dataloader_v1(txt, batch_size=4, max_length=256,
                          stride=128, shuffle=True, drop_last=True, num_workers=0):
     # Initialize the tokenizer
-    # tokenizer = tiktoken.get_encoding("gpt2")
     tokenizer = BertTokenizer.from_pretrained("bert-base-chinese")
 
     # Create dataset
